@@ -16,7 +16,7 @@ try{
     Write-Host "no json file. let us have everything done for the first time"
     $cert = New-SelfSignedCertificate -CertStoreLocation $certLocation -DnsName $certSubject 
     $keyValue = [System.Convert]::ToBase64String($cert.GetRawCertData())
-    #Login-AzureRmAccount 
+    Login-AzureRmAccount 
     $sp = New-AzureRMADServicePrincipal -DisplayName $principalName -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore
     Sleep 20
     New-AzureRmRoleAssignment -RoleDefinitionName Contributor -ServicePrincipalName $sp.ApplicationId
