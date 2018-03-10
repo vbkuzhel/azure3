@@ -11,7 +11,7 @@ if (!$certs) { Write-Host "no certificate. lets create certificate and service p
 $cert=New-SelfSignedCertificate -DnsName $env:computername -CertStoreLocation $certLocation 
 $keyValue = [System.Convert]::ToBase64String($cert.GetRawCertData())
 Login-AzureRmAccount
-$sp = New-AzureRMADServicePrincipal -DisplayName exampleapp -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore
+$sp = New-AzureRMADServicePrincipal -DisplayName "azure"+$env:computername -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore
 Sleep 20
 New-AzureRmRoleAssignment -RoleDefinitionName Contributor -ServicePrincipalName $sp.ApplicationId
 }
