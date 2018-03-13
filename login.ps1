@@ -14,7 +14,7 @@ try{
 } catch {
     if ($true){
     Write-Host "no json file. let us have everything done for the first time"
-    $cert = New-SelfSignedCertificate -CertStoreLocation $certLocation -DnsName $certSubject 
+    $cert = New-SelfSignedCertificate -CertStoreLocation $certLocation  -Subject $certSubject -KeySpec KeyExchange -KeyLength 2048
     $keyValue = [System.Convert]::ToBase64String($cert.GetRawCertData())
     Login-AzureRmAccount 
     $sp = New-AzureRMADServicePrincipal -DisplayName $principalName -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore
