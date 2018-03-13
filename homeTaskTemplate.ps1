@@ -2,7 +2,7 @@ try{
    .\login.ps1
 } catch {
     Write-Host "login script is missing"
-    Login-AzAccount
+    Login-AzuereRMAccount
 }
 function createAll  {
 #write here steps to perform home task    
